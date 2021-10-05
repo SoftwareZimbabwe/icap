@@ -6,6 +6,9 @@
 
 ICAP Time Tracking App.
 
+## Userscreens
+Please refer to USER MANUAL DOCUMENT (Word)
+
 ## Requirements
 
 For building and running the application you need:
