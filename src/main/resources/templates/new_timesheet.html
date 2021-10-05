@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>ICAP Time Tracking</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<style>
+    .itemPicker {
+        background-color: white;
+    }
+
+    .itemPickerCell {
+        width: 35px;
+        height: 35px;
+        margin: 1px;
+        border: 1px solid #EEE;
+    }
+</style>
+	
+</head>
+<body>
+
+<!-- create navigation bar ( header) -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">ICAP Time Tracking</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<br>
+	<br>
+	<div class="container">
+
+		<h3>New Timesheet</h3>
+
+        <div class="row">
+
+            <div class="col-md-4">
+            
+                <form action="#" th:action="@{/saveTimesheet}" th:object="${timesheet}" method="POST">
+                        
+                        <div class="form-group">
+                            <input type="text" th:field="*{yearBegins}" placeholder="Year Begins" class="form-control mb-4 col-4"> 
+                        </div>
+                            
+                        <div class="form-group">
+                            <input type="text" th:field="*{yearEnds}" placeholder="Year Ends" class="form-control mb-4 col-4">
+                        </div>
+                                     
+                        <div class="form-group">   
+                            <button type="submit" class="btn btn-info col-2"> Save Timesheet</button>
+                        </div>
+                </form>
+                
+            </div>
+        </div>
+
+        <hr/>
+        <div class="row">
+
+            <div class="col-12">
+
+                <table class="itemPicker">
+                    <tr>
+                        <td></td>
+                        <td>Jul</td>
+                        <td>Aug</td>
+                        <td>Sep</td>
+                        <td>Oct</td>
+                        <td>Nov</td>
+                        <td>Dec</td>
+                        <td>Jan</td>
+                        <td>Feb</td>
+                        <td>Mar</td>
+                        <td>Apr</td>
+                        <td>May</td>
+                        <td>June</td>
+                    </tr>
+                    <tr th:each="i : ${#numbers.sequence(1, 31)}">
+                        <td th:text="${i}"></td>
+                        <td class="itemPickerCell"  th:each="j : ${#numbers.sequence(1, 12)}">
+                            <select name="timeInstance" class="btn-primary">
+                                <option value=""></option>
+                                <option value="V">V</option>
+                                <option value="5V">0.5 V</option>
+                                <option value="SL">SL</option>
+                                <option value="5SL">0.5 SL</option>
+                                <option value="H">H</option>
+                                <option value="D">D</option>
+                                <option value="O">O</option>
+                              </select>
+                        </td>
+                    </tr>
+                </table>
+
+                
+            </div>
+
+        </div>
+
+
+        <div class="row">
+		
+            <div class="col-md-12">
+                <hr>
+                <a th:href = "@{/}"> Back to Timesheet List</a>
+            </div>
+        </div>
+		
+	</div>
+</body>
+</html>

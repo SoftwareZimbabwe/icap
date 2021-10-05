@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>ICAP Time Tracking</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<!-- create navigation bar ( header) -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">ICAP Time Tracking</a>
+			</div>
+		</div>
+	</nav>
+
+<br>
+<br>
+	<!-- Create HTML registration form -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<!-- success message -->
+				<div th:if="${param.success}">
+					<div class="alert alert-info">You've successfully registered to time tracker!</div>
+				</div>
+
+				<h1>Registration</h1>
+
+				<form th:action="@{/registration}" method="post" th:object="${user}">
+					<div class="form-group">
+						<label class="control-label" for="fullName"> Full Name </label>
+						<input id="fullName" class="form-control" th:field="*{fullName}" required autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="dateOfBirth"> Date Of Birth </label> 
+						<input id="dateOfBirth" type="date" class="form-control" th:field="*{dateOfBirth}" required />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="jobTitle"> Job Title </label> 
+						<input id="jobTitle" class="form-control" th:field="*{jobTitle}" required />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="employeeNumber"> Employee Number </label>
+						<input id="employeeNumber" class="form-control" th:field="*{employeeNumber}" required />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="immediateSupervisor"> Immediate Supervisor</label>
+
+						<select id="immediateSupervisor" class="btn-secondary" th:field="*{immediateSupervisor}">
+							<option value="0">Super User</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="immediateSupervisor"> Role</label>
+
+						<select id="userrole" class="btn-primary">
+							<option value="0">Employee</option>
+							<option value="0">HR Manager</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="email"> Email </label>
+						<input id="email" class="form-control" type="email" th:field="*{email}" required  />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="password"> Password </label>
+						<input id="password" class="form-control" type="password" th:field="*{password}" required />
+					</div>
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Register</button>
+						<span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
